@@ -28,11 +28,12 @@ class User{
     // login user 
 
     loggedIn(){
-        this.hasToken();
+        return this.hasToken();
     }
 
     loggedOut(){
         appStroage.clear();
+        window.location = '/';
     }
 
     // user name niye asha 

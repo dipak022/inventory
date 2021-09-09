@@ -8,7 +8,7 @@ class appStroage{
         localStorage.setItem('user',user);
      }
 
-     store(){
+     store(token,user){
          this.storeToken('token',token);
          this.storeUser('user',user);
      }
