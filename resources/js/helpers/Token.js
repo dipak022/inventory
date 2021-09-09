@@ -24,7 +24,6 @@ class Token {
         return JSON.parse(atob(paylpad));
 
     }
-
-
+    
 }
 export default Token = new Token();
