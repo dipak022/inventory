@@ -9,8 +9,8 @@ class appStroage{
      }
 
      store(token,user){
-         this.storeToken('token',token);
-         this.storeUser('user',user);
+         this.storeToken(token);
+         this.storeUser(user);
      }
 
      clear(){

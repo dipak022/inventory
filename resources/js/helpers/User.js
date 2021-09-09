@@ -4,13 +4,13 @@ import appStroage from "./appStroage";
 
 class User{
        
-    responseAfterLogin(response){
+    responseAfterLogin(res){
 
-        const access_token = response.data.access_token;
-        const user_name = response.data.name;
+        const access_token = res.data.access_token;
+        const username = res.data.name;
         if(Token.isValid(access_token)){
 
-            appStroage.store(access_token,user_name)
+            appStroage.store(access_token,username)
 
         }
 
@@ -28,7 +28,7 @@ class User{
     // login user 
 
     loggedIn(){
-        return this.hasToken();
+        return this.hasToken(); 
     }
 
     loggedOut(){
@@ -49,8 +49,8 @@ class User{
     id(){
         if(this.loggedIn()){
 
-            const paylpad = Token.paylpad(localStorage.getItem('token'));
-            return paylpad.sub;
+            const payload = Token.payload(localStorage.getItem('token'));
+            return payload.sub;
 
         }
         return false;

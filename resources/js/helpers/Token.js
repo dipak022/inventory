@@ -2,26 +2,28 @@ class Token {
 
 
     isValid(token){
-        const paylpad = this.paylpad(token);
+        const payload = this.payload(token);
 
-        if(paylpad){
+        if(payload){
 
-            return paylpad.iss == "http://127.0.0.1:8000/api/auth/login" || "http://127.0.0.1:8000/api/auth/register" ? true : false;
+            return payload.iss == "http://127.0.0.1:8000/api/auth/login" || "http://127.0.0.1:8000/api/auth/register" ? true : false;
 
         }
 
         return false;
     }
 
-    paylpad(token){
-        const paylpad = token.split('.')[1];
-        return this.decode(paylpad);
+    //payload method 
+
+    payload(token){
+        const payload = token.split('.')[1];
+        return this.decode(payload);
     }
 
 
-    decode(paylpad){
+    decode(payload){
 
-        return JSON.parse(atob(paylpad));
+        return JSON.parse(atob(payload));
 
     }
     
