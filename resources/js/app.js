@@ -8,6 +8,10 @@ Vue.use(VueRouter)
 // router import
 import {routes} from './routes';
 
+// import user class
+import User from './helpers/User';
+window.User = User;
+
 
 
 
