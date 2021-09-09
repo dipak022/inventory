@@ -16,7 +16,8 @@
     </head>
     <body class="sb-nav-fixed">
         <div id="app">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="navbarid" style="display: none;" 
+              v-show="$router.path === '/' || $route.path === '/register' ? false : true ">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
             <!-- Sidebar Toggle-->
@@ -36,13 +37,13 @@
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><router-link class="dropdown-item" to="/logout">Logout</router-link></li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
+        <div id="layoutSidenav" >
+            <div id="layoutSidenav_nav" style="display: none;" v-show="$route.path === '/' || $route.path === '/register' ? false : true ">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -133,7 +134,18 @@
         </div>
         </div>
         <script src="{{asset('js/app.js')}}"></script>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            
+            let token =localStorage.getItem('token');
+            if (token) {
+                $("#navbarid").css("display","");
+                $("#layoutSidenav_nav").css("display","");
+
+            }
+
+        </script>
         <script src="{{asset('backend/js/scripts.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('backend/assets/demo/chart-area-demo.js')}}"></script>
