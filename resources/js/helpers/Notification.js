@@ -39,6 +39,15 @@ class Notification{
         }).show();
 
      }
+
+     image_validation(){
+        new Noty({
+            type: "error",
+            layout: "topRight",
+            text: 'Image less then 1 mb.',
+            timeout: 1000,
+        }).show();
+     }
  }
 
 

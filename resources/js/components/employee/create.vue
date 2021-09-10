@@ -19,7 +19,8 @@
                         </div>
                     </div>
                 </div>
-            </div>            <div class="row">
+            </div>  
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
@@ -27,7 +28,7 @@
                                 <div class="card-body">
                                     <div id="calendar1" class="calendar-s">
 
-                                        <form @submit.prevent="employeeInsert">
+                                        <form @submit.prevent="employeeInsert" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="form-label" for="exampleInputText1">First Name</label>
                                                 <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="form.name">
@@ -78,7 +79,7 @@
                                                     <div class="col-md-6" style="text-align:center; ">
                                                         <div class="form-level-group">
                                                         <label class="form-label" for="exampleInputdate">Choice Image Here</label>  
-                                                        </br> 
+                                                        
                                                         <img :src="form.patho" style="height : 50px; width : 50px; ">
                                                     
                                                         </div>
@@ -99,7 +100,7 @@
                 </div>
             </div>
         </div>
-          
+        
       
 
 </template>
@@ -126,6 +127,43 @@ export default {
         }
 
     },
+    methods:{
+        employeeInsert(){
+
+            axios.post('/api/employee/',this.form)
+            .then(()=>{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                })
+                this.$router.push({ name : 'employee'})
+            })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        onFileSelect(event){
+            let file= event.target.files[0];
+            //console.log(file);
+            if(file.size > 1045770){
+
+             Toast.fire({
+                    icon: 'warning',
+                    title: 'Image Less then 1 mb. '
+                })
+
+            }else{
+               let reader = new FileReader();
+               reader.onload = event =>{
+                   this.form.patho = event.target.result
+               }
+               
+              reader.readAsDataURL(file);
+            }
+              
+
+        }
+
+    }
     
 }
 </script>

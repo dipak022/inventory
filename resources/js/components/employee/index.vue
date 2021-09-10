@@ -45,15 +45,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                        <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="" alt="profile"></td>
-                                                        <td>Anna Sthesia</td>
-                                                        <td>(760) 756 7568</td>
-                                                        <td>annasthesia@gmail.com</td>
-                                                        <td>USA</td>
-                                                        <td>50000</td>
-                                                        <td>01024854 245455 546544</td>
-                                                        <td>2019/12/01</td>
+                                                        <tr v-for="employee in employees" :key="employee.id">
+                                                        <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" :src="employee.patho" alt="profile" id="em_patho"></td>
+                                                        <td>{{ employee.name }}</td>
+                                                        <td>{{ employee.phone }}</td>
+                                                        <td>{{ employee.email }}</td>
+                                                        <td>{{ employee.address }}</td>
+                                                        <td>{{ employee.salary }}</td>
+                                                        <td>{{ employee.nid }}</td>
+                                                        <td>{{ employee.joining_date }}</td>
                                                         
                                                         <td>
                                                             <div class="flex align-items-center list-user-action">
@@ -112,12 +112,33 @@ export default {
        if(! User.loggedIn()){
           this.$router.push({ name : '/'});
        }
+    },
+    data(){
+        return{
+            employees:{}
+        }
+
+    },methods:{
+        allEmployee(){
+            axios.get('/api/employee/')
+            .then(({ data })=>{
+                this.employees = data
+            })
+            .catch()
+        }
+    },
+    created(){
+        this.allEmployee();
+
     }
     
 }
 </script>
 
 <style>
-
+#em_patho{
+   height: 40px;
+   widows: 40px; 
+}
 </style>
 
