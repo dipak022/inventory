@@ -5,6 +5,7 @@ let forgate = require('./components/auth/forgate.vue').default;
 let logout = require('./components/auth/logout.vue').default;
 //end authentation
 let home = require('./components/home.vue').default;
+let employee = require('./components/employee/create.vue').default;
 
 export const routes = [
   { path: '/', component: login, name: '/' },
@@ -12,5 +13,6 @@ export const routes = [
   { path: '/forgate', component: forgate, name: 'forgate' },
   { path: '/logout', component: logout, name: 'logout' },
   { path: '/home', component: home, name: 'home' },
+  { path: '/employee', component: employee, name: 'employee' },
   
 ]
