@@ -12,7 +12,7 @@
                             </div>
                             <div class="card-action">
                                 
-                                 <router-link  class="btn btn-info"  to="#" >
+                                 <router-link  class="btn btn-info"  to="/employee" >
                                     <i class="fa fa-plus"></i>All Employee 
                                     </router-link>
                             </div>
@@ -27,59 +27,70 @@
                                 <div class="card-body">
                                     <div id="calendar1" class="calendar-s">
 
-                                          <form>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputText1">First Name</label>
-                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputEmail3">Email Address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputphone">Address </label>
-                                <input type="text" class="form-control" id="exampleInputphone" placeholder="Enter Address">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputNumber1">Salary</label>
-                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter Salary">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputNumber1">Jani nah</label>
-                                <input type="text" class="form-control" id="exampleInputNumber1" placeholder="Enter Salary">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputNumber1">NID Number</label>
-                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter NID Number">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputdate">Date Input</label>
-                                <input type="date" class="form-control" id="exampleInputdate" >
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputmonth">Month Input</label>
-                                <input type="month" class="form-control" id="exampleInputmonth" value="2019-12">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputweek">Week Input</label>
-                                <input type="week" class="form-control" id="exampleInputweek" value="2019-W46">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputtime">Time Input</label>
-                                <input type="time" class="form-control" id="exampleInputtime" value="13:45">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleInputdatetime">Date and Time Input</label>
-                                <input type="datetime-local" class="form-control" id="exampleInputdatetime" value="2019-12-19T13:45:00">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleFormControlTextarea1">Example textarea</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="submit" class="btn btn-danger">cancel</button>
-                        </form>
+                                        <form @submit.prevent="employeeInsert">
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputText1">First Name</label>
+                                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="form.name">
+                                                <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputEmail3">Email Address</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email" v-model="form.email">
+                                                <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputEmail3">Phone</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email" v-model="form.phone">
+                                                <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputphone">Address </label>
+                                                <input type="text" class="form-control" id="exampleInputphone" placeholder="Enter Address" v-model="form.address">
+                                                <small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputNumber1">Salary</label>
+                                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter Salary" v-model="form.salary">
+                                                <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputNumber1">NID Number</label>
+                                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter NID Number" v-model="form.nid">
+                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputdate">Joining Date </label>
+                                                <input type="date" class="form-control" id="exampleInputdate" v-model="form.joining_date">
+                                                <small class="text-danger" v-if="errors.joining_date">{{ errors.joining_date[0] }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-level-group">
+                                                        <label class="form-label" for="exampleInputdate">Choice Image </label>   
+                                                        <input type="file" class="form-control" id="patho" @change="onFileSelect">
+                                                        <small class="text-danger" v-if="errors.patho">{{ errors.patho[0] }}</small>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-md-6" style="text-align:center; ">
+                                                        <div class="form-level-group">
+                                                        <label class="form-label" for="exampleInputdate">Choice Image Here</label>  
+                                                        </br> 
+                                                        <img :src="form.patho" style="height : 50px; width : 50px; ">
+                                                    
+                                                        </div>
+                                                    </div>   
+                                                </div>   
+                                                
+                                                
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-danger">cancel</button>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +100,7 @@
             </div>
         </div>
           
-    </div>    
+      
 
 </template>
 <script>
@@ -104,8 +115,12 @@ export default {
             form:{
                 name : null,
                 email : null,
-                password : null,
-                confirm_password : null,
+                phone : null,
+                salary : null,
+                address : null,
+                patho : null,
+                nid : null,
+                joining_date : null,
             },
             errors:{}
         }

@@ -73,7 +73,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar">
                             <li class="nav-item">
-                                <router-link  class="nav-link " to="/employee">
+                                <router-link  class="nav-link " to="/store.employee">
                                   <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -87,7 +87,7 @@
                                 
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link " to="#">
+                                <router-link class="nav-link " to="/employee">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
