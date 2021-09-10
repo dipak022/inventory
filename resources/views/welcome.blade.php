@@ -64,7 +64,7 @@
                                     <path d="M21.9998 17.3992C21.9998 19.2648 20.4609 20.7777 18.5609 20.7777C16.6621 20.7777 15.1221 19.2648 15.1221 17.3992C15.1221 15.5325 16.6621 14.0195 18.5609 14.0195C20.4609 14.0195 21.9998 15.5325 21.9998 17.3992Z" fill="currentColor"></path>
                                 </svg>
                             </i>
-                            <span class="item-name">Menu Style</span>
+                            <span class="item-name">Employee</span>
                             <i class="right-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -73,7 +73,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar">
                             <li class="nav-item">
-                                <a class="nav-link " href="index-horizontal.html">
+                                <router-link  class="nav-link " to="/employee">
                                   <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -82,11 +82,12 @@
                                         </svg>
                                     </i>
                                   <i class="sidenav-mini-icon"> H </i>
-                                  <span class="item-name"> Horizontal </span>
-                                </a>
+                                  <span class="item-name">Add Employee </span>
+                                </router-link >
+                                
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="index-dual-horizontal.html">
+                                <router-link class="nav-link " to="#">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -95,8 +96,8 @@
                                         </svg>
                                     </i>
                                     <i class="sidenav-mini-icon"> D </i>
-                                    <span class="item-name">Dual Horizontal</span>
-                                </a>
+                                    <span class="item-name">All Employee</span>
+                                </router-link>
                             </li>
                             
                            
@@ -118,7 +119,7 @@
                                     <path d="M21.9998 17.3992C21.9998 19.2648 20.4609 20.7777 18.5609 20.7777C16.6621 20.7777 15.1221 19.2648 15.1221 17.3992C15.1221 15.5325 16.6621 14.0195 18.5609 14.0195C20.4609 14.0195 21.9998 15.5325 21.9998 17.3992Z" fill="currentColor"></path>
                                 </svg>
                             </i>
-                            <span class="item-name">Menu Style</span>
+                            <span class="item-name">Suppliers</span>
                             <i class="right-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -127,7 +128,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="supplier-menu" data-bs-parent="#supplier">
                             <li class="nav-item">
-                                <a class="nav-link " href="index-horizontal.html">
+                                <router-link class="nav-link " to="#">
                                   <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -136,11 +137,11 @@
                                         </svg>
                                     </i>
                                   <i class="sidenav-mini-icon"> H </i>
-                                  <span class="item-name"> Horizontal </span>
-                                </a>
+                                  <span class="item-name"> Add Suppliers </span>
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="index-dual-horizontal.html">
+                                <router-link class="nav-link " to="#">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -149,8 +150,8 @@
                                         </svg>
                                     </i>
                                     <i class="sidenav-mini-icon"> D </i>
-                                    <span class="item-name">Dual Horizontal</span>
-                                </a>
+                                    <span class="item-name">All Suppliers</span>
+                                </router-link>
                             </li>
                             
                            
@@ -169,15 +170,8 @@
 
 
 
-                    
-                   
-                    
-                    
-                    
-                  
-                    
-                    
-                    
+
+
                     
                 </ul>
                 <!-- Sidebar Menu End -->        </div>
@@ -411,6 +405,7 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
+      </br></br></br></br></br></br>
         <router-view></router-view>
       </div>
     
