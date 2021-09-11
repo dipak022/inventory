@@ -98,7 +98,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = DB::table('employees')->where('id',$id)->first();
+        return response()->json($employee);
     }
 
     /**
@@ -121,7 +122,40 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $data=array();   
+         $data['name']=$request->name;
+         $data['email']=$request->email;
+         $data['phone']=$request->phone;
+         $data['address']=$request->address;
+         $data['salary']=$request->salary;
+         $data['nid']=$request->nid;
+         $data['joining_date']=$request->joining_date;
+         $image = $request->newpatho;
+         if($image){
+            
+            $position = strpos($image,';');
+            $sub = substr($image, 0 , $position);
+            $ext = explode('/',$sub)[1];
+            //return $ext;
+            $name = time().".".$ext;
+            $patho = Image::make($request->newpatho)->resize(240,200);
+            $upload_path = "backend/employee";
+            $image_url = $upload_path.$name;
+            $success= $patho->save($image_url);
+            if($success){
+                $data['patho']=$image_url;
+                $employee = DB::table('employees')->where('id',$id)->first();
+                $image_path = $patho->patho;
+                unlink($image_path);
+                $done=DB::table('employees')->where('id',$id)->update($data);
+
+            }
+         }else{
+            $old_patho = $request->patho;
+            $data['patho']=$old_patho;
+            $done=DB::table('employees')->where('id',$id)->update($data);
+
+         }
     }
 
     /**
@@ -132,6 +166,15 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('employees')->where('id',$id)->delete();
+        $employee = DB::table('employees')->where('id',$id)->first();
+        $patho = $employee->patho;
+        if($patho){
+            unlink($patho);
+            DB::table('employees')->where('id',$id)->delete();
+        }
+        else{
+            DB::table('employees')->where('id',$id)->delete();
+        }
+        
     }
 }
