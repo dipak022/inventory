@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use DB;
+use Image;
 class CategoryController extends Controller
 {
     /**
@@ -14,14 +16,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $category= Category::all();
+        //$employee=DB::table('employees')->get();
+        return response()->json($category);
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    }
     public function create()
     {
         //
@@ -35,7 +40,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'category_name' => 'required',
+            
+        ]);
+
+        
+
+        $category = new Category;
+        $category->category_name = $request->category_name;
+        $category->save();
     }
 
     /**
