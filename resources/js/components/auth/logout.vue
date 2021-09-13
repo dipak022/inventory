@@ -2,10 +2,10 @@
 <template>
 
 </template>
-<script lang="ts">
+<script>
 
 
-export default ({
+export default {
     created(){
        //User.loggedOut();
        localStorage.removeItem('token');
@@ -17,7 +17,7 @@ export default ({
 
         this.$router.push({ name : '/'})
     }
-})
+}
 </script>
 
 <style>

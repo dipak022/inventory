@@ -49,16 +49,16 @@
 
     </div>
 </template>
-<script lang="ts">
+<script>
 
 
-export default ({
+export default {
     created(){
        if(!User.loggedIn()){
           this.$router.push({ name : '/'});
        }
     }
-})
+}
 </script>
 
 <style>

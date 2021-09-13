@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Employee;
+use App\Models\Supplier;
 use DB;
 use Image;
-class EmployeeController extends Controller
+class suppliersController extends Controller
 {
 
    
@@ -18,9 +18,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee= Employee::all();
+        $supplier= Supplier::all();
         //$employee=DB::table('employees')->get();
-        return response()->json($employee);
+        return response()->json($supplier);
     }
 
     /**
@@ -46,9 +46,8 @@ class EmployeeController extends Controller
             'email' => 'required',
             'phone' => 'required | unique:employees',
             'address' => 'required',
-            'salary' => 'required',
-            'nid' => 'required',
-            'joining_date' => 'required',
+            'shop_name' => 'required',
+            
         ]);
 
         
@@ -62,33 +61,30 @@ class EmployeeController extends Controller
             //return $ext;
             $name = time().".".$ext;
             $patho = Image::make($image)->resize(240,200);
-            $upload_path = "backend/employee/";
+            $upload_path = "backend/supplier/";
             $image_url = $upload_path.$name;
             $patho->save($image_url);
 
-            $employee = new Employee;
-            $employee->name = $request->name;
-            $employee->email = $request->email;
-            $employee->phone = $request->phone;
-            $employee->address = $request->address;
-            $employee->salary = $request->salary;
-            $employee->nid = $request->nid;
-            $employee->joining_date = $request->joining_date;
-            $employee->patho = $image_url;
-            $employee->save();
+            $supplier = new Supplier;
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->address = $request->address;
+            $supplier->shop_name = $request->shop_name;
+        
+            $supplier->patho = $image_url;
+            $supplier->save();
 
 
         }else{
 
-            $employee = new Employee;
-            $employee->name = $request->name;
-            $employee->email = $request->email;
-            $employee->phone = $request->phone;
-            $employee->address = $request->address;
-            $employee->salary = $request->salary;
-            $employee->nid = $request->nid;
-            $employee->joining_date = $request->joining_date;
-            $employee->save();
+            $supplier = new Supplier;
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->address = $request->address;
+            $supplier->shop_name = $request->shop_name;
+            $supplier->save();
         }
     }
 
@@ -100,8 +96,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = DB::table('employees')->where('id',$id)->first();
-        return response()->json($employee);
+        $supplier = DB::table('suppliers')->where('id',$id)->first();
+        return response()->json($supplier);
     }
 
     /**
@@ -124,14 +120,13 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $data=array();   
+        $data=array();   
          $data['name']=$request->name;
          $data['email']=$request->email;
          $data['phone']=$request->phone;
          $data['address']=$request->address;
-         $data['salary']=$request->salary;
-         $data['nid']=$request->nid;
-         $data['joining_date']=$request->joining_date;
+         $data['shop_name']=$request->shop_name;
+        
          $image = $request->newpatho;
          if($image){
             
@@ -141,21 +136,21 @@ class EmployeeController extends Controller
             //return $ext;
             $name = time().".".$ext;
             $patho = Image::make($image)->resize(240,200);
-            $upload_path = "backend/employee";
+            $upload_path = "backend/supplier/";
             $image_url = $upload_path.$name;
             $success= $patho->save($image_url);
             if($success){
                 $data['patho']=$image_url;
-                $employee = DB::table('employees')->where('id',$id)->first();
-                $image_path = $patho->patho;
+                $supplier = DB::table('suppliers')->where('id',$id)->first();
+                $image_path = $supplier->patho;
                 unlink($image_path);
-                $done=DB::table('employees')->where('id',$id)->update($data);
+                $done=DB::table('suppliers')->where('id',$id)->update($data);
 
             }
          }else{
             $old_patho = $request->patho;
             $data['patho']=$old_patho;
-            $done=DB::table('employees')->where('id',$id)->update($data);
+            $done=DB::table('suppliers')->where('id',$id)->update($data);
 
          }
     }
@@ -168,15 +163,14 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = DB::table('employees')->where('id',$id)->first();
-        $patho = $employee->patho;
+        $supplier = DB::table('suppliers')->where('id',$id)->first();
+        $patho = $supplier->patho;
         if($patho){
             unlink($patho);
-            DB::table('employees')->where('id',$id)->delete();
+            DB::table('suppliers')->where('id',$id)->delete();
         }
         else{
-            DB::table('employees')->where('id',$id)->delete();
+            DB::table('suppliers')->where('id',$id)->delete();
         }
-        
     }
 }

@@ -73,7 +73,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar">
                             <li class="nav-item">
-                                <router-link  class="nav-link " to="/store.employee">
+                                <router-link  class="nav-link " to="/store-employee">
                                   <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -128,7 +128,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="supplier-menu" data-bs-parent="#supplier">
                             <li class="nav-item">
-                                <router-link class="nav-link " to="#">
+                                <router-link class="nav-link " to="/store-supplier">
                                   <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -141,7 +141,7 @@
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link " to="#">
+                                <router-link class="nav-link " to="supplier">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -417,7 +417,8 @@
                   <li class="list-inline-item"><a href="extra/terms-of-service.html">Terms of Use</a></li>
               </ul>
               <div class="right-panel">
-                  ©<script>document.write(new Date().getFullYear())</script> Hope UI, Made with
+                 <!-- ©<script>document.write(new Date().getFullYear())</script> Hope UI, Made with -->
+                 © 2021 Hope UI, Made with
                   <span class="text-gray">
                       
                   </span> by <a href="">Dipak Debnath</a>.
@@ -596,9 +597,9 @@
             
             let token =localStorage.getItem('token');
             if (token) {
-                $("#navbarid").css("display","");
-                $("#layoutSidenav_nav").css("display","");
-                $("#footers").css("display","");
+                $("#navbarid").css("display");
+                $("#layoutSidenav_nav").css("display");
+                $("#footers").css("display");
                 
 
                 

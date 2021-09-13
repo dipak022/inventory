@@ -30,7 +30,7 @@
 
                                         <form @submit.prevent="employeeInsert" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label class="form-label" for="exampleInputText1">First Name</label>
+                                                <label class="form-label" for="exampleInputText1">Full Name</label>
                                                 <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="form.name">
                                                 <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
                                             </div>
@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="exampleInputEmail3">Phone</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email" v-model="form.phone">
+                                                <input type="number" class="form-control" id="exampleInputEmail3"  placeholder="Enter Phone" v-model="form.phone">
                                                 <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
                                             </div>
                                             
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
         
       
 

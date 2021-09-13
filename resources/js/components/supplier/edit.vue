@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div class="card-title mb-0">
-                                <h4 class="mb-0"> Employee Update</h4>
+                                <h4 class="mb-0">Add New Supplier</h4>
                             </div>
                             <div class="card-action">
                                 
-                                 <router-link  class="btn btn-info"  to="/employee" >
-                                    <i class="fa fa-plus"></i>All Employee 
+                                 <router-link  class="btn btn-info"  to="/supplier" >
+                                    <i class="fa fa-plus"></i>All Supplier 
                                     </router-link>
                             </div>
                         </div>
@@ -28,9 +28,9 @@
                                 <div class="card-body">
                                     <div id="calendar1" class="calendar-s">
 
-                                        <form @submit.prevent="employeeUpdate" enctype="multipart/form-data">
+                                        <form @submit.prevent="supplierUpdate" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label class="form-label" for="exampleInputText1">First Name</label>
+                                                <label class="form-label" for="exampleInputText1">Full Name</label>
                                                 <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="form.name">
                                                 <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
                                             </div>
@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="exampleInputEmail3">Phone</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email" v-model="form.phone">
+                                                <input type="number" class="form-control" id="exampleInputEmail3"  placeholder="Enter Phone" v-model="form.phone">
                                                 <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
                                             </div>
                                             
@@ -51,22 +51,11 @@
                                                 <small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="exampleInputNumber1">Salary</label>
-                                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter Salary" v-model="form.salary">
-                                                <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+                                                <label class="form-label" for="exampleInputNumber1">Shop name</label>
+                                                <input type="text" class="form-control" id="exampleInputNumber1" placeholder="Enter Shop name" v-model="form.shop_name">
+                                                <small class="text-danger" v-if="errors.shop_name">{{ errors.shop_name[0] }}</small>
                                             </div>
-                                            
-                                            <div class="form-group">
-                                                <label class="form-label" for="exampleInputNumber1">NID Number</label>
-                                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter NID Number" v-model="form.nid">
-                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label" for="exampleInputdate">Joining Date </label>
-                                                <input type="date" class="form-control" id="exampleInputdate" v-model="form.joining_date">
-                                                <small class="text-danger" v-if="errors.joining_date">{{ errors.joining_date[0] }}</small>
-                                            </div>
+                                        
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -99,14 +88,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
         
       
 
 </template>
 <script>
 export default {
-    mounted(){
+   mounted(){
        if(! User.loggedIn()){
           this.$router.push({ name : '/'});
        }
@@ -117,12 +106,11 @@ export default {
                 name : null,
                 email : null,
                 phone : null,
-                salary : null,
+                shop_name : null,
                 address : null,
                 patho : null,
-                newpatho : '',
-                nid : null,
-                joining_date : null,
+                newpatho : null,
+                
             },
             errors:{}
         }
@@ -130,22 +118,22 @@ export default {
     },
     created(){
         let id = this.$route.params.id
-         axios.get('/api/employee/'+id)
+         axios.get('/api/supplier/'+id)
          .then(({data}) => (this.form = data))
          .catch()
 
     },
     methods:{
-        employeeUpdate(){
+        supplierUpdate(){
 
             let id = this.$route.params.id
-            axios.patch('/api/employee/'+id,this.form)
+            axios.patch('/api/supplier/'+id,this.form)
             .then(()=>{
                 Toast.fire({
                     icon: 'success',
                     title: 'Update  in successfully'
                 })
-                this.$router.push({ name : 'employee'})
+                this.$router.push({ name : 'supplier'})
             })
             .catch(error => this.errors = error.response.data.errors)
 
