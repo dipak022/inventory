@@ -146,7 +146,7 @@ export default {
 
         }
     },
-    created(){
+    mounted(){
         this.allsuppliers();
 
     }

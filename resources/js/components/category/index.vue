@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div class="card-title mb-0">
-                                <h4 class="mb-0">All  Supplier</h4>
+                                <h4 class="mb-0">All  Category</h4>
                             </div>
                             <div class="card-action">
                                 
-                                 <router-link  class="btn btn-info"  to="/store-supplier" >
-                                    <i class="fa fa-plus"></i>Add Supplier 
+                                 <router-link  class="btn btn-info"  to="/store-category" >
+                                    <i class="fa fa-plus"></i>Add Category 
                                     </router-link>
                             </div>
                         </div>
@@ -32,31 +32,21 @@
                                                 <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
                                                     <thead>
                                                         <tr class="ligth">
-                                                        <th>Profile</th>
-                                                        <th>Name</th>
-                                                        <th>Contact</th>
-                                                        <th>Email</th>
-                                                        <th>address</th>
-                                            
-                                                        <th>Shope Name</th>
                                                         
+                                                        <th>Name</th>                         
                                                         <th style="min-width: 100px">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="supplier in suppliers" :key="supplier.id">
-                                                        <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" :src="supplier.patho" alt="profile" id="em_patho"></td>
-                                                        <td>{{ supplier.name }}</td>
-                                                        <td>{{ supplier.phone }}</td>
-                                                        <td>{{ supplier.email }}</td>
-                                                        <td>{{ supplier.address }}</td>
-                                                        <td>{{ supplier.shop_name }}</td>
+                                                        <tr v-for="category in categoryes" :key="category.id">
+                                                        
+                                                        <td>{{ category.category_name }}</td>
                                                         
                                                         
                                                         <td>
                                                             <div class="flex align-items-center list-user-action">
                                                                 
-                                                                <router-link class="btn btn-sm btn-icon btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" :to="{name : 'edit.supplier', params :{id:supplier.id} }">
+                                                                <router-link class="btn btn-sm btn-icon btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" :to="{name : 'edit.category', params :{id:category.id} }">
                                                                     <span class="btn-inner">
                                                                     <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                         <path d="M11.4925 2.78906H7.75349C4.67849 2.78906 2.75049 4.96606 2.75049 8.04806V16.3621C2.75049 19.4441 4.66949 21.6211 7.75349 21.6211H16.5775C19.6625 21.6211 21.5815 19.4441 21.5815 16.3621V12.3341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -65,7 +55,7 @@
                                                                     </svg>
                                                                     </span>
                                                                 </router-link>
-                                                                <a class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" @click="deleteSuppliers(supplier.id)">
+                                                                <a class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" @click="deleteCategory(category.id)">
                                                                     <span class="btn-inner">
                                                                     <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
                                                                         <path d="M19.3248 9.46826C19.3248 9.46826 18.7818 16.2033 18.4668 19.0403C18.3168 20.3953 17.4798 21.1893 16.1088 21.2143C13.4998 21.2613 10.8878 21.2643 8.27979 21.2093C6.96079 21.1823 6.13779 20.3783 5.99079 19.0473C5.67379 16.1853 5.13379 9.46826 5.13379 9.46826" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -104,18 +94,18 @@ export default {
     },
     data(){
         return{
-            suppliers:{}
+            categoryes:{}
         }
 
     },methods:{
-        allsuppliers(){
-            axios.get('/api/supplier/')
+        allCategoryes(){
+            axios.get('/api/category/')
             .then(({ data })=>{
-                this.suppliers = data
+                this.categoryes = data
             })
             .catch()
         },
-        deleteSuppliers(id){
+        deleteCategory(id){
             Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -126,15 +116,15 @@ export default {
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.value) {
-                axios.delete('/api/supplier/'+id)
+                axios.delete('/api/category/'+id)
                 .then(()=>{
-                    this.suppliers =this.suppliers.filter(supplier =>{
-                        return supplier.id != id;
+                    this.categoryes =this.categoryes.filter(category =>{
+                        return category.id != id;
 
                     })
                 })
                 .catch(()=>{
-                    this.$router.push({ name : 'employee'})
+                    this.$router.push({ name : 'category'})
                 })
                 Swal.fire(
                 'Deleted!',
@@ -146,8 +136,8 @@ export default {
 
         }
     },
-    created(){
-        this.allsuppliers();
+    mounted(){
+        this.allCategoryes();
 
     }
     
@@ -155,9 +145,6 @@ export default {
 </script>
 
 <style>
-#em_patho{
-   height: 40px;
-   widows: 40px; 
-}
+
 </style>
 
