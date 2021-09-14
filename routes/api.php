@@ -42,3 +42,5 @@ Route::apiResource('/supplier', 'App\Http\Controllers\Api\suppliersController');
 Route::apiResource('/category', 'App\Http\Controllers\Api\CategoryController');
 
 Route::apiResource('/product', 'App\Http\Controllers\Api\ProductController');
+
+Route::apiResource('/expanses', 'App\Http\Controllers\Api\ExpansesController');

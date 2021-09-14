@@ -26,7 +26,16 @@ let storeproduct = require('./components/product/create.vue').default;
 let product = require('./components/product/index.vue').default;
 let editproduct = require('./components/product/edit.vue').default;
 
+// expanses component load 
+let storeexpanses = require('./components/expanses/create.vue').default;
+let expanses = require('./components/expanses/index.vue').default;
+let editexpanses = require('./components/expanses/edit.vue').default;
 
+
+// expanses component load 
+let storesalary = require('./components/salary/create.vue').default;
+let salary = require('./components/salary/index.vue').default;
+let editsalary = require('./components/salary/edit.vue').default;
 
 export const routes = [
   { path: '/', component: login, name: '/' },
@@ -47,10 +56,23 @@ export const routes = [
   { path: '/category', component: category, name: 'category' },
   { path: '/edit-category/:id', component: editcategory, name: 'edit.category' },
 
-    // Product route here  
-    { path: '/store-product', component: storeproduct, name: 'store-product' },
-    { path: '/product', component: product, name: 'product' },
-    { path: '/edit-product/:id', component: editproduct, name: 'edit.product' },
+  // Product route here  
+  { path: '/store-product', component: storeproduct, name: 'store-product' },
+  { path: '/product', component: product, name: 'product' },
+  { path: '/edit-product/:id', component: editproduct, name: 'edit.product' },
+
+
+    
+  // expanses route here  
+  { path: '/store-expanses', component: storeexpanses, name: 'store-expanses' },
+  { path: '/expanses', component: expanses, name: 'expanses' },
+  { path: '/edit-expanses/:id', component: editexpanses, name: 'edit.expanse' },
+
+  
+   // salary route here  
+   { path: '/store-salary', component: storesalary, name: 'store-salary' },
+   { path: '/salary', component: salary, name: 'salary' },
+   { path: '/edit-salary/:id', component: editsalary, name: 'edit.salary' },
   
  
   
