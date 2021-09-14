@@ -41,6 +41,12 @@ let editexpanses = require('./components/expanses/edit.vue').default;
 let strock = require('./components/product/strock.vue').default;
 let editstrock = require('./components/product/edit-strock.vue').default;
 
+// employye component load 
+
+let storecustomer = require('./components/customer/create.vue').default;
+let customer = require('./components/customer/index.vue').default;
+let editcustomer = require('./components/customer/edit.vue').default;
+
 export const routes = [
   { path: '/', component: login, name: '/' },
   { path: '/register', component: register, name: 'register' },
@@ -81,6 +87,12 @@ export const routes = [
    //strock route here
    { path: '/strock', component: strock, name: 'strock' },
    { path: '/edit-strock/:id', component: editstrock, name: 'edit.strock' },
+
+
+  // customer route here
+  { path: '/store-customer', component: storecustomer, name: 'store-customer' },
+  { path: '/customer', component: customer, name: 'customer' },
+  { path: '/edit-customer/:id', component: editcustomer, name: 'edit.customer' },
   
  
   
