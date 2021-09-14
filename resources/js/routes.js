@@ -33,9 +33,13 @@ let editexpanses = require('./components/expanses/edit.vue').default;
 
 
 // expanses component load 
-let storesalary = require('./components/salary/create.vue').default;
-let salary = require('./components/salary/index.vue').default;
-let editsalary = require('./components/salary/edit.vue').default;
+//let storesalary = require('./components/salary/create.vue').default;
+//let salary = require('./components/salary/index.vue').default;
+//let editsalary = require('./components/salary/edit.vue').default;
+
+// strock compnonet load
+let strock = require('./components/product/strock.vue').default;
+let editstrock = require('./components/product/edit-strock.vue').default;
 
 export const routes = [
   { path: '/', component: login, name: '/' },
@@ -70,9 +74,13 @@ export const routes = [
 
   
    // salary route here  
-   { path: '/store-salary', component: storesalary, name: 'store-salary' },
-   { path: '/salary', component: salary, name: 'salary' },
-   { path: '/edit-salary/:id', component: editsalary, name: 'edit.salary' },
+   //{ path: '/store-salary', component: storesalary, name: 'store-salary' },
+   //{ path: '/salary', component: salary, name: 'salary' },
+   //{ path: '/edit-salary/:id', component: editsalary, name: 'edit.salary' },
+
+   //strock route here
+   { path: '/strock', component: strock, name: 'strock' },
+   { path: '/edit-strock/:id', component: editstrock, name: 'edit.strock' },
   
  
   

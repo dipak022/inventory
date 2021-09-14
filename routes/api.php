@@ -44,3 +44,7 @@ Route::apiResource('/category', 'App\Http\Controllers\Api\CategoryController');
 Route::apiResource('/product', 'App\Http\Controllers\Api\ProductController');
 
 Route::apiResource('/expanses', 'App\Http\Controllers\Api\ExpansesController');
+
+
+
+Route::post('/strock/update/{id}', [App\Http\Controllers\Api\SalariesController::class, 'updateStrock']);
