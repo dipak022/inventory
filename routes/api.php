@@ -40,3 +40,5 @@ Route::apiResource('/employee', 'App\Http\Controllers\Api\EmployeeController');
 Route::apiResource('/supplier', 'App\Http\Controllers\Api\suppliersController');
 
 Route::apiResource('/category', 'App\Http\Controllers\Api\CategoryController');
+
+Route::apiResource('/product', 'App\Http\Controllers\Api\ProductController');
