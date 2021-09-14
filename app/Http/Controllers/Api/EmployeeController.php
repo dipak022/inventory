@@ -141,13 +141,13 @@ class EmployeeController extends Controller
             //return $ext;
             $name = time().".".$ext;
             $patho = Image::make($image)->resize(240,200);
-            $upload_path = "backend/employee";
+            $upload_path = "backend/employee/";
             $image_url = $upload_path.$name;
             $success= $patho->save($image_url);
             if($success){
                 $data['patho']=$image_url;
                 $employee = DB::table('employees')->where('id',$id)->first();
-                $image_path = $patho->patho;
+                $image_path = $employee->patho;
                 unlink($image_path);
                 $done=DB::table('employees')->where('id',$id)->update($data);
 
