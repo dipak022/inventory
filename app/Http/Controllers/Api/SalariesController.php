@@ -8,7 +8,64 @@ use App\Models\Salaries;
 use DB;
 class SalariesController extends Controller
 {
-    public function updateStrock( Request $request, $id){
+
+    public function paid(Request $request, $id){
+        $validated = $request->validate([
+            'salary_month' => 'required',
+        ]);
+        $data =array();
+        $check = DB::table('salaries')->where('employee_id',$id)->where('salary_month',$request->salary_month)->first();
+        if($check){
+            return response()->json("Sallary Already Paid");
+
+        }else{
+            $data['employee_id']=$id;
+            $data['amounts']=$request->salary;
+            $data['salary_date']=date('d/m/Y');
+            $data['salary_month']=$request->salary_month;
+            $data['salary_year']=date('Y');
+            DB::table('salaries')->insert($data);
+
+        }
+        
+        
+
+    }
+
+    public function AllSalary(){
+        $allsalaey =DB::table('salaries')->select('salary_month')->groupBy('salary_month')->get();
+        return response()->json($allsalaey);
+
+    }
+
+
+    public function viewSalaey($id){
+
+        $month = $id;
+        $view =DB::table('salaries')
+            ->join('employees','salaries.employee_id','employees.id')
+            ->select('employees.name','salaries.*')
+            ->where('salaries.salary_month',$month)
+            ->get();
+
+        return response()->json($view);
+       
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function updateStrock(Request $request, $id){
 
         $validated = $request->validate([
             

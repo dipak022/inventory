@@ -47,4 +47,10 @@ Route::apiResource('/expanses', 'App\Http\Controllers\Api\ExpansesController');
 
 Route::post('/strock/update/{id}', [App\Http\Controllers\Api\SalariesController::class, 'updateStrock']);
 
+Route::post('/salary/paid/{id}', [App\Http\Controllers\Api\SalariesController::class, 'paid']);
+
+Route::get('/salary', [App\Http\Controllers\Api\SalariesController::class, 'AllSalary']);
+
+Route::get('/salary/view/{id}', [App\Http\Controllers\Api\SalariesController::class, 'viewSalaey']);
+
 Route::apiResource('/customer', 'App\Http\Controllers\Api\CustomerController');

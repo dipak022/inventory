@@ -144,10 +144,10 @@ class ProductController extends Controller
          $data['product_code']=$request->product_code;
          $data['product_name']=$request->product_name;
          $data['baying_price']=$request->baying_price;
-         $data['selling_price']=$request->baying_price;
-         $data['root']=$request->baying_price;
-         $data['baying_date']=$request->baying_price;
-         $data['product_quantaty']=$request->baying_price;
+         $data['selling_price']=$request->selling_price;
+         $data['root']=$request->root;
+         $data['baying_date']=$request->baying_date;
+         $data['product_quantaty']=$request->product_quantaty;
         
          $image = $request->newpatho;
          if($image){

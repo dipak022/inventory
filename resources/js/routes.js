@@ -32,20 +32,24 @@ let expanses = require('./components/expanses/index.vue').default;
 let editexpanses = require('./components/expanses/edit.vue').default;
 
 
-// expanses component load 
-//let storesalary = require('./components/salary/create.vue').default;
-//let salary = require('./components/salary/index.vue').default;
-//let editsalary = require('./components/salary/edit.vue').default;
+// salary component load 
+let salary = require('./components/salary/all-employee.vue').default;
+let paysalary = require('./components/salary/create.vue').default;
+let allsalary = require('./components/salary/index.vue').default;
+let viewsalary = require('./components/salary/view.vue').default;
 
 // strock compnonet load
 let strock = require('./components/product/strock.vue').default;
 let editstrock = require('./components/product/edit-strock.vue').default;
 
 // employye component load 
-
 let storecustomer = require('./components/customer/create.vue').default;
 let customer = require('./components/customer/index.vue').default;
 let editcustomer = require('./components/customer/edit.vue').default;
+
+
+//point of sale 
+let pos = require('./components/pos/pointofsale.vue').default;
 
 export const routes = [
   { path: '/', component: login, name: '/' },
@@ -80,9 +84,10 @@ export const routes = [
 
   
    // salary route here  
-   //{ path: '/store-salary', component: storesalary, name: 'store-salary' },
-   //{ path: '/salary', component: salary, name: 'salary' },
-   //{ path: '/edit-salary/:id', component: editsalary, name: 'edit.salary' },
+   { path: '/given-salary', component: salary, name: 'given-salary' },
+   { path: '/pay-salary/:id', component: paysalary, name: 'pay.salary' },
+   { path: '/salary', component: allsalary, name: 'salary' },
+   { path: '/view-salary/:id', component: viewsalary, name: 'view-salary' },
 
    //strock route here
    { path: '/strock', component: strock, name: 'strock' },
@@ -93,6 +98,11 @@ export const routes = [
   { path: '/store-customer', component: storecustomer, name: 'store-customer' },
   { path: '/customer', component: customer, name: 'customer' },
   { path: '/edit-customer/:id', component: editcustomer, name: 'edit.customer' },
+ 
+
+    // pos route here
+    { path: '/pos', component: pos, name: 'pos' },
+    
   
  
   
