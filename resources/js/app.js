@@ -36,6 +36,8 @@ window.Toast =Toast;
 
 // end swet alert
 
+window.Reload = new Vue();
+
 
 
 

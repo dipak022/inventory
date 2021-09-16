@@ -4,7 +4,7 @@
         
             
             <div class="row">
-                <div class="col-lg-5 col-md-5">
+                <div class="col-lg-6 col-md-6">
                     <div class="card">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div class="card-title mb-0">
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7">
+                <div class="col-lg-6 col-md-6">
                     <div class="card">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div class="card-title mb-0">
@@ -35,7 +35,7 @@
             </div> 
              
             <div class="row">
-                <div class="col-lg-5 col-md-5">
+                <div class="col-lg-6 col-md-6">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card  ">
@@ -49,23 +49,28 @@
                                                     <thead>
                                                         <tr class="ligth">
                                                         <th>Name</th>
-                                                        <th>Quentity</th>
+                                                        <th>Qty</th>
                                                         <th>Unit</th>
-                                                        <th>Total Price</th>
+                                                        <th> Price</th>
                                                         <th style="min-width: 100px">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="employee in filtersearch" :key="employee.id">
-                                                        <td>Dipak</td>
-                                                        <td>10</td>
-                                                        <td>2500</td>
-                                                        <td>3000</td>
+                                                        <tr v-for="cart in carts" :key="cart.id">
+                                                        <td>{{cart.pro_name}}</td>
+                                                        <td><input type="text" readonly="" style="width:20px;" :value="cart.pro_quentity">
+                                                        <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
+
+                                                        <button @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger" v-if="cart.pro_quentity >=2">-</button>
+                                                        <button class="btn btn-sm btn-danger" v-else="" disabled>-</button>
+                                                        </td>
+                                                        <td>{{cart.pro_price}}</td>
+                                                        <td>{{cart.sub_total}}</td>
                                                         <td>
                                                             <div class="flex align-items-center list-user-action">
                                                                 
                                                                 
-                                                                <a class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" @click="deleteEmployee(employee.id)">
+                                                                <a class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" @click="removeItem(cart.id)">
                                                                     <span class="btn-inner">
                                                                     <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
                                                                         <path d="M19.3248 9.46826C19.3248 9.46826 18.7818 16.2033 18.4668 19.0403C18.3168 20.3953 17.4798 21.1893 16.1088 21.2143C13.4998 21.2613 10.8878 21.2643 8.27979 21.2093C6.96079 21.1823 6.13779 20.3783 5.99079 19.0473C5.67379 16.1853 5.13379 9.46826 5.13379 9.46826" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -178,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7">
+                <div class="col-lg-6 col-md-6">
                     
                     <div class="row">
                         <div class="col-lg-12">
@@ -202,7 +207,7 @@
                                                 <div class="row container" style="padding:10px;">
                                                     
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-6" v-for="product in filtersearch" :key="product.id" >
-                                                        <a href="#">
+                                                        <button class="btn btn-sm" @click.prevent="AddtoCart(product.id)">
                                                             <div class="card" >
                                                             <img class="bg-soft-primary rounded" :src="product.patho" alt="profile" id="em_patho" style="width: 5rem; text-align:center;">
                                                             <div class="card-body">
@@ -212,7 +217,7 @@
                                                             
                                                             </div>
                                                             </div>
-                                                        </a>    
+                                                        </button>    
                                                     </div>  
                                                 </div>
                                             </div>
@@ -224,7 +229,7 @@
                                                 <div class="row container" style="padding:10px;">
                                                     
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-6" v-for="singleproduct in singlefiltersearch" :key="singleproduct.id" >
-                                                        <a href="#">
+                                                        <button @click.prevent="AddtoCart(singleproduct.id)">
                                                             <div class="card" >
                                                             <img class="bg-soft-primary rounded" :src="singleproduct.patho" alt="profile" id="em_patho" style="width: 5rem; text-align:center;">
                                                             <div class="card-body">
@@ -234,7 +239,7 @@
                                                             
                                                             </div>
                                                             </div>
-                                                        </a>    
+                                                        </button>    
                                                     </div>  
                                                 </div>
                                             </div>
@@ -354,6 +359,7 @@ export default {
             searchTerm:'',
             getsearchTerm:'',
             customers: '',
+            carts:[],
             
         }
 
@@ -371,6 +377,69 @@ export default {
 
     },
     methods:{
+        // cart methords here 
+        AddtoCart(id){
+
+            axios.get('/api/addTocart/'+id)
+            .then(()=>{
+                Reload.$emit('afterAdd');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'add To Cart successfully'
+                })
+               // this.$router.push({ name : 'expanses'})
+            })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        showCartProduct(){
+            axios.get('/api/cart/product/')
+            .then(({ data })=>{
+                this.carts = data
+            })
+            .catch()
+
+        },
+        removeItem(id){
+            axios.get('/api/remove/cart/'+id)
+            .then(()=>{
+                Reload.$emit('afterAdd');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Remove product'
+                })
+               // this.$router.push({ name : 'expanses'})
+            })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        increment(id){
+            axios.get('/api/increment/'+id)
+            .then(()=>{
+                Reload.$emit('afterAdd');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'increment successfully'
+                })
+               
+            })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        decrement(id){
+            axios.get('/api/decrement/'+id)
+            .then(()=>{
+                Reload.$emit('afterAdd');
+                Toast.fire({
+                    icon: 'success',
+                    title: ' decrement successfully'
+                })
+               
+            })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        // end cart methords here 
         allProducts(){
             axios.get('/api/product/')
             .then(({ data })=>{
@@ -446,6 +515,10 @@ export default {
         this.allProducts();
         this.allCategory();
         this.allcustomer();
+        this.showCartProduct();
+        Reload.$on('afterAdd',()=>{
+            this.showCartProduct();
+        })
 
     }
     

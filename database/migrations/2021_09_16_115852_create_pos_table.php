@@ -15,6 +15,12 @@ class CreatePosTable extends Migration
     {
         Schema::create('pos', function (Blueprint $table) {
             $table->id();
+            $table->integer('pro_id');
+            $table->string('pro_name');
+            $table->string('pro_quentity');
+            $table->string('pro_price');
+            $table->string('sub_total');
+            $table->string('total')->nullable();
             $table->timestamps();
         });
     }

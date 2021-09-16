@@ -59,5 +59,18 @@ Route::post('/salary/update/{id}', [App\Http\Controllers\Api\SalariesController:
 
 Route::get('/getting/product/{id}', [App\Http\Controllers\Api\PosController::class, 'getProducts']);
 
+// cart route here 
+Route::get('/addTocart/{id}', [App\Http\Controllers\Api\CartController::class, 'AddtoCart']);
+
+Route::get('/cart/product/', [App\Http\Controllers\Api\CartController::class, 'CartProduct']);
+
+Route::get('/remove/cart/{id}', [App\Http\Controllers\Api\CartController::class, 'removeCart']);
+
+Route::get('/increment/{id}', [App\Http\Controllers\Api\CartController::class, 'Increment']);
+
+Route::get('/decrement/{id}', [App\Http\Controllers\Api\CartController::class, 'Decrement']);
+
+
+
 
 Route::apiResource('/customer', 'App\Http\Controllers\Api\CustomerController');
