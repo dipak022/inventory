@@ -57,4 +57,7 @@ Route::get('/edit/salary/{id}', [App\Http\Controllers\Api\SalariesController::cl
 
 Route::post('/salary/update/{id}', [App\Http\Controllers\Api\SalariesController::class, 'UpdateSalaey']);
 
+Route::get('/getting/product/{id}', [App\Http\Controllers\Api\PosController::class, 'getProducts']);
+
+
 Route::apiResource('/customer', 'App\Http\Controllers\Api\CustomerController');

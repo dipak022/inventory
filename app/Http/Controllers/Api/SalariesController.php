@@ -76,16 +76,7 @@ class SalariesController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
+// strock update
 
     public function updateStrock(Request $request, $id){
 
