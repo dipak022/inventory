@@ -12,9 +12,9 @@
                             </div>
                             <div class="card-action">
                                 
-                                 <router-link  class="btn btn-info"  to="/product" >
-                                    <i class="fa fa-plus"></i>Create Customer 
-                                    </router-link>
+                                 <a  class="btn btn-info"  to="/product" data-toggle="modal" data-target="#exampleModal" style="color:white;">
+                                    Create Customer 
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,10 @@
                                                     <form  enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="form-label" for="exampleInputText1">Customer Name</label>
-                                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" >
+                                                <select class="form-control">
+                                                    <option  v-for="customer in customers" >{{ customer.name }}</option>
+                                                    
+                                                </select> 
                                                 <small class="text-danger" ></small>
                                             </div>
                                             <div class="form-group">
@@ -142,7 +145,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="exampleInputText1">Tranestion Amount Select </label>
-                                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" >
+                                                <select class="form-control" >
+                                                    <option  >Bangla</option>
+                                                    
+                                                </select> 
                                                 <small class="text-danger" ></small>
                                             </div>
                                             
@@ -242,7 +248,83 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- Customer  Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                                    <div id="calendar1" class="calendar-s">
+
+                                        <form @submit.prevent="customerInsert" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputText1">Full Name</label>
+                                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="form.name">
+                                                <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputEmail3">Email Address</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email" v-model="form.email">
+                                                <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputEmail3">Phone</label>
+                                                <input type="number" class="form-control" id="exampleInputEmail3"  placeholder="Enter Phone" v-model="form.phone">
+                                                <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputphone">Address </label>
+                                                <input type="text" class="form-control" id="exampleInputphone" placeholder="Enter Address" v-model="form.address">
+                                                <small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
+                                            </div>
+                                            
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputNumber1">NID Number</label>
+                                                <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter NID Number" v-model="form.nid">
+                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
+                                                
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-level-group">
+                                                        <label class="form-label" for="exampleInputdate">Choice Image </label>   
+                                                        <input type="file" class="form-control" id="patho" @change="onFileSelect">
+                                                        <small class="text-danger" v-if="errors.patho">{{ errors.patho[0] }}</small>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-md-6" style="text-align:center; ">
+                                                        <div class="form-level-group">
+                                                        <label class="form-label" for="exampleInputdate">Choice Image Here</label>  
+                                                        
+                                                        <img :src="form.patho" style="height : 50px; width : 50px; ">
+                                                    
+                                                        </div>
+                                                    </div>   
+                                                </div>   
+                                                
+                                                
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            
+                                    </form>
+                                    </div>
+                                </div>
+                    </div>
+                    
+                    </div>
+                </div>
+                </div>
     </div>
         
       
@@ -257,11 +339,22 @@ export default {
     },
     data(){
         return{
+            form:{
+                name : null,
+                email : null,
+                phone : null,
+                address : null,
+                patho : null,
+                nid : null,
+            },
+            errors:[],
             products:[],
             categoryes:'',
             getProducts:[],
             searchTerm:'',
             getsearchTerm:'',
+            customers: '',
+            
         }
 
     },computed: {
@@ -290,13 +383,61 @@ export default {
             .then(({ data })=>{
                 this.categoryes = data
             })
-            .catch()
+            .catch(console.log('error'))
         },subProducts(id){
             axios.get('/api/getting/product/'+id)
             .then(({ data })=>{
                 this.getProducts = data
             })
+            .catch(console.log('error'))
+
+        },
+        allcustomer(){
+            axios.get('/api/customer/')
+            .then(({ data })=>{
+                this.customers = data
+            })
             .catch()
+        },
+        customerInsert(){
+
+            axios.post('/api/customer/',this.form)
+            .then(()=>{
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                     })
+                     $('#closeModel').click();
+                    this.customers =this.customers.filter(customer =>{
+                        return customer.id != id;
+                      
+
+                    })
+                    
+
+                })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        onFileSelect(event){
+            let file= event.target.files[0];
+            //console.log(file);
+            if(file.size > 1045770){
+
+             Toast.fire({
+                    icon: 'warning',
+                    title: 'Image Less then 1 mb. '
+                })
+
+            }else{
+               let reader = new FileReader();
+               reader.onload = event =>{
+                   this.form.patho = event.target.result
+               }
+               
+              reader.readAsDataURL(file);
+            }
+              
 
         }
     },
@@ -304,6 +445,7 @@ export default {
     mounted(){
         this.allProducts();
         this.allCategory();
+        this.allcustomer();
 
     }
     
