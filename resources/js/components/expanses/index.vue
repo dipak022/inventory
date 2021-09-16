@@ -26,10 +26,11 @@
                             <div class="card  ">
                                 <div class="card-body">
                                     <div id="calendar1" class="calendar-s">
-
                                        <div class="card-body px-0">
+                                           <label>Search data :</label>
+                                            <input type="text" v-model="searchTerm" class="float-right"><br><br>
                                             <div class="table-responsive">
-                                                <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
+                                                <table id="user-list-table" class="table table-striped" role="grid">
                                                     <thead>
                                                         <tr class="ligth">
                                                         
@@ -39,7 +40,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="expanse in expanses" :key="expanse.id">
+                                                        <tr v-for="expanse in filtersearch" :key="expanse.id">
                                                         
                                                         <td>{{ expanse.details }}</td>
                                                          <td>{{ expanse.amount }}</td>
@@ -96,7 +97,17 @@ export default {
     },
     data(){
         return{
-            expanses:{}
+            expanses:[],
+            searchTerm:'',
+
+        }
+
+    },
+    computed: {
+        filtersearch(){
+           return this.expanses.filter(expanse =>{
+              return expanse.amount.match(this.searchTerm) ||  expanse.details.match(this.searchTerm)
+            })
         }
 
     },methods:{

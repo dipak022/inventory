@@ -53,4 +53,8 @@ Route::get('/salary', [App\Http\Controllers\Api\SalariesController::class, 'AllS
 
 Route::get('/salary/view/{id}', [App\Http\Controllers\Api\SalariesController::class, 'viewSalaey']);
 
+Route::get('/edit/salary/{id}', [App\Http\Controllers\Api\SalariesController::class, 'editSalaey']);
+
+Route::post('/salary/update/{id}', [App\Http\Controllers\Api\SalariesController::class, 'UpdateSalaey']);
+
 Route::apiResource('/customer', 'App\Http\Controllers\Api\CustomerController');

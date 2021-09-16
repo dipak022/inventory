@@ -28,8 +28,10 @@
                                     <div id="calendar1" class="calendar-s">
 
                                        <div class="card-body px-0">
+                                           <label>Search data :</label>
+                                            <input type="text" v-model="searchTerm" class="float-right"><br><br>
                                             <div class="table-responsive">
-                                                <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
+                                                <table id="user-list-table" class="table table-striped" role="grid" >
                                                     <thead>
                                                         <tr class="ligth">
                                                         <th>Profile</th>
@@ -42,7 +44,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="customer in customers" :key="customer.id">
+                                                        <tr v-for="customer in filtersearch" :key="customer.id">
                                                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" :src="customer.patho" alt="profile" id="em_patho"></td>
                                                         <td>{{ customer.name }}</td>
                                                         <td>{{ customer.phone }}</td>
@@ -101,10 +103,19 @@ export default {
     },
     data(){
         return{
-            customers:{}
+            customers:[],
+            searchTerm :''
         }
 
-    },methods:{
+    },computed: {
+        filtersearch(){
+           return this.customers.filter(customer =>{
+              return customer.phone.match(this.searchTerm)
+            })
+        }
+
+    },
+    methods:{
         allcustomer(){
             axios.get('/api/customer/')
             .then(({ data })=>{
@@ -127,7 +138,6 @@ export default {
                 .then(()=>{
                     this.customers =this.customers.filter(customer =>{
                         return customer.id != id;
-
                     })
                 })
                 .catch(()=>{

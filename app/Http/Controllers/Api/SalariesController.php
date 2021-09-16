@@ -52,6 +52,28 @@ class SalariesController extends Controller
        
     }
 
+    public function editSalaey($id){
+       
+        $view =DB::table('salaries')
+            ->join('employees','salaries.employee_id','employees.id')
+            ->select('employees.name','employees.email','employees.phone','salaries.*')
+            ->where('salaries.id',$id)
+            ->first();
+        return response()->json($view);
+
+    }
+
+    public function UpdateSalaey(Request $request, $id){
+        $data = array();
+        $data['employee_id']=$request->employee_id;
+        $data['amounts']=$request->amounts;
+        $data['salary_date']=date('d/m/Y');
+        $data['salary_month']=$request->salary_month;
+        $data['salary_year']=date('Y');
+        $done=DB::table('salaries')->where('id',$id)->update($data);
+
+    }
+
 
 
 

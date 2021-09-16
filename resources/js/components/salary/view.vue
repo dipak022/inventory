@@ -28,8 +28,10 @@
                                     <div id="calendar1" class="calendar-s">
 
                                        <div class="card-body px-0">
+                                           <label>Search data :</label>
+                                            <input type="text" v-model="searchTerm" class="float-right"><br><br>
                                             <div class="table-responsive">
-                                                <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
+                                                <table id="user-list-table" class="table table-striped" role="grid">
                                                     <thead>
                                                         <tr class="ligth">
                                                         <th>Name</th>
@@ -40,8 +42,8 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="salary in salarys" :key="salary.id">
-                                                        <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" :src="employee.patho" alt="profile" id="em_patho"></td>
+                                                        <tr v-for="salary in filtersearch" :key="salary.id">
+                                                        
                                                         <td>{{ salary.name }}</td>
                                                         <td>{{ salary.salary_month }}</td>
                                                         <td>{{ salary.salary_date }}</td>
@@ -89,10 +91,20 @@ export default {
     },
     data(){
         return{
-            salarys:{}
+            salarys:[],
+             searchTerm:'',
         }
 
-    },methods:{
+    },
+    computed: {
+        filtersearch(){
+           return this.salarys.filter(salary =>{
+              return salary.salary_month.match(this.searchTerm) 
+            })
+        }
+
+    },
+    methods:{
         viewSalary(){
             let id = this.$route.params.id
             axios.get('/api/salary/view/'+id)

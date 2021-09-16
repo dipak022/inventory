@@ -28,8 +28,11 @@
                                     <div id="calendar1" class="calendar-s">
 
                                        <div class="card-body px-0">
+                                           <label>Search data :</label>
+                                            <input type="text" v-model="searchTerm" class="float-right"><br><br>
                                             <div class="table-responsive">
-                                                <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
+                                                
+                                                <table id="user-list-table" class="table table-striped" role="grid">
                                                     <thead>
                                                         <tr class="ligth">
                                                         <th>Profile</th>
@@ -37,7 +40,6 @@
                                                         <th>Contact</th>
                                                         <th>Email</th>
                                                         <th>address</th>
-                                            
                                                         <th>Salary</th>
                                                         <th>Nid Number</th>
                                                         <th>Join Date</th>
@@ -45,7 +47,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="employee in employees" :key="employee.id">
+                                                        <tr v-for="employee in filtersearch" :key="employee.id">
                                                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" :src="employee.patho" alt="profile" id="em_patho"></td>
                                                         <td>{{ employee.name }}</td>
                                                         <td>{{ employee.phone }}</td>
@@ -99,14 +101,22 @@
 </template>
 <script>
 export default {
-    created(){
+    mounted(){
        if(! User.loggedIn()){
           this.$router.push({ name : '/'});
        }
     },
     data(){
         return{
-            employees:{}
+            employees: [],
+            searchTerm:'',
+        }
+
+    },computed: {
+        filtersearch(){
+           return this.employees.filter(employee =>{
+              return employee.phone.match(this.searchTerm)
+            })
         }
 
     },methods:{
