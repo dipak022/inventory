@@ -133,7 +133,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label" for="exampleInputText1">Customer Name</label>
                                                             <select class="form-control" v-model="customer_id">
-                                                                <option value="customer.id"  v-for="customer in customers" >{{ customer.name }}</option>
+                                                                <option :value="customer.id"  v-for="customer in customers" >{{ customer.name }}</option>
                                                                 
                                                             </select> 
                                                             <small class="text-danger" ></small>

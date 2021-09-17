@@ -39526,7 +39526,7 @@ var render = function() {
                                     _vm._l(_vm.customers, function(customer) {
                                       return _c(
                                         "option",
-                                        { attrs: { value: "customer.id" } },
+                                        { domProps: { value: customer.id } },
                                         [_vm._v(_vm._s(customer.name))]
                                       )
                                     }),
