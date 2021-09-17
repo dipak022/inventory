@@ -74,6 +74,10 @@ Route::get('/vats/', [App\Http\Controllers\Api\CartController::class, 'vats']);
 
 Route::post('/orderdone/', [App\Http\Controllers\Api\PosController::class, 'orderDone']);
 
+Route::get('/orders/', [App\Http\Controllers\Api\OrderController::class, 'todayOrder']);
+
+Route::get('/order/details/{id}', [App\Http\Controllers\Api\OrderController::class, 'OrderDetails']);
+
 
 
 
