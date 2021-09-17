@@ -103,10 +103,10 @@
                                                     <h4>Product Sell Information</h4>
                                                     <br>
                                                     <ul class="list-group">
-                                                        <li class="list-group-item" style="color:white;">Total Quentity : <span class="badge" style="margin-left:220px;">120000</span></li>
-                                                        <li class="list-group-item" style="color:white;">Sub Total : <span class="badge" style="margin-left:255px;">51020</span></li>
-                                                        <li class="list-group-item" style="color:white;">Vat : <span class="badge" style="margin-left:300px;">30000</span></li>
-                                                        <li class="list-group-item" style="color:white;">Total : <span class="badge" style="margin-left:286px;">30000</span></li>
+                                                        <li class="list-group-item" style="color:white;">Total Quentity : <span class="badge" style="margin-left:180px;">{{qty}} pices</span></li>
+                                                        <li class="list-group-item" style="color:white;">Sub Total : <span class="badge" style="margin-left:200px;">{{subtotal}} tk</span></li>
+                                                        <li class="list-group-item" style="color:white;">Vat : <span class="badge" style="margin-left:250px;">{{ vats.vat }} %</span></li>
+                                                        <li class="list-group-item" style="color:white;">Total : <span class="badge" style="margin-left:230px;">{{ subtotal*vats.vat /100 +subtotal }} tk</span></li>
                                                     </ul>
                                                 </div> 
                                                
@@ -129,39 +129,37 @@
                                                 <div class="container">
                                                    
                                                     <br>
-                                                    <form  enctype="multipart/form-data">
-                                            <div class="form-group">
-                                                <label class="form-label" for="exampleInputText1">Customer Name</label>
-                                                <select class="form-control">
-                                                    <option  v-for="customer in customers" >{{ customer.name }}</option>
-                                                    
-                                                </select> 
-                                                <small class="text-danger" ></small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label" for="exampleInputText1">Pay Amount</label>
-                                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" >
-                                                <small class="text-danger" ></small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label" for="exampleInputText1">Due Amount</label>
-                                                <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" >
-                                                <small class="text-danger" ></small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label" for="exampleInputText1">Tranestion Amount Select </label>
-                                                <select class="form-control" >
-                                                    <option  >Bangla</option>
-                                                    
-                                                </select> 
-                                                <small class="text-danger" ></small>
-                                            </div>
-                                            
-                                            
-                                            
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            
-                                    </form>
+                                                    <form @submit.prevent="orderDone"  enctype="multipart/form-data">
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="exampleInputText1">Customer Name</label>
+                                                            <select class="form-control" v-model="customer_id">
+                                                                <option value="customer.id"  v-for="customer in customers" >{{ customer.name }}</option>
+                                                                
+                                                            </select> 
+                                                            <small class="text-danger" ></small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="exampleInputText1">Pay Amount</label>
+                                                            <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="pay">
+                                                            <small class="text-danger" ></small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="exampleInputText1">Due Amount</label>
+                                                            <input type="text" class="form-control" id="exampleInputText1"  placeholder="Enter Name" v-model="due">
+                                                            <small class="text-danger" ></small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="exampleInputText1">Tranestion Amount Select </label>
+                                                            <select class="form-control" v-model="payby">
+                                                                <option v-model="handcash">hand cash</option>
+                                                                <option v-model="others">oters</option>
+                                                                
+                                                            </select> 
+                                                            <small class="text-danger" ></small>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        
+                                                </form>
                                                 </div> 
                                                
                                             </div>
@@ -289,15 +287,11 @@
                                                 <input type="text" class="form-control" id="exampleInputphone" placeholder="Enter Address" v-model="form.address">
                                                 <small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
                                             </div>
-                                            
-                                            
                                             <div class="form-group">
                                                 <label class="form-label" for="exampleInputNumber1">NID Number</label>
                                                 <input type="number" class="form-control" id="exampleInputNumber1" placeholder="Enter NID Number" v-model="form.nid">
-                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
-                                                
+                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>   
                                             </div>
-                                            
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -315,17 +309,13 @@
                                                     
                                                         </div>
                                                     </div>   
-                                                </div>   
-                                                
-                                                
-                                            </div>
-                                            
+                                                </div>               
+                                            </div>                         
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            
                                     </form>
                                     </div>
                                 </div>
-                    </div>
+                           </div>
                     
                     </div>
                 </div>
@@ -352,6 +342,10 @@ export default {
                 patho : null,
                 nid : null,
             },
+            customer_id:'',
+            pay:'',
+            due:'',
+            payby:'',
             errors:[],
             products:[],
             categoryes:'',
@@ -360,6 +354,8 @@ export default {
             getsearchTerm:'',
             customers: '',
             carts:[],
+            vats:'',
+
             
         }
 
@@ -373,6 +369,20 @@ export default {
            return this.getProducts.filter(getProduct =>{
               return getProduct.product_name.match(this.getsearchTerm)
             })
+        },
+        qty(){
+            let sum =0;
+            for(let i =0; i < this.carts.length; i++){
+                sum = sum + (parseFloat(this.carts[i].pro_quentity));
+            }
+            return sum;
+        },
+        subtotal(){
+            let sum =0;
+            for(let i =0; i < this.carts.length; i++){
+                sum = sum + (parseFloat(this.carts[i].sub_total));
+            }
+            return sum;
         }
 
     },
@@ -387,7 +397,6 @@ export default {
                     icon: 'success',
                     title: 'add To Cart successfully'
                 })
-               // this.$router.push({ name : 'expanses'})
             })
             .catch(error => this.errors = error.response.data.errors)
 
@@ -408,7 +417,6 @@ export default {
                     icon: 'success',
                     title: 'Remove product'
                 })
-               // this.$router.push({ name : 'expanses'})
             })
             .catch(error => this.errors = error.response.data.errors)
 
@@ -436,6 +444,27 @@ export default {
                 })
                
             })
+            .catch(error => this.errors = error.response.data.errors)
+
+        },
+        vat(){
+            axios.get('/api/vats/')
+            .then(({ data })=>{
+                this.vats = data
+            })
+            .catch()
+
+        },
+        orderDone(){
+            let total =this.subtotal*this.vats.vat /100 +this.subtotal;
+            var data ={qty:this.qty, subtotal:this.subtotal, customer_id:this.customer_id, payby:this.payby, pay:this.pay, due:this.due, vat:this.vats.vat, total:total}
+            axios.post('/api/orderdone/',data)
+            .then(()=>{
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                     })
+                })
             .catch(error => this.errors = error.response.data.errors)
 
         },
@@ -478,11 +507,9 @@ export default {
                      })
                      $('#closeModel').click();
                     this.customers =this.customers.filter(customer =>{
-                        return customer.id != id;
-                      
+                        return customer.id != id; 
 
-                    })
-                    
+                    })  
 
                 })
             .catch(error => this.errors = error.response.data.errors)
@@ -515,6 +542,7 @@ export default {
         this.allProducts();
         this.allCategory();
         this.allcustomer();
+        this.vat();
         this.showCartProduct();
         Reload.$on('afterAdd',()=>{
             this.showCartProduct();

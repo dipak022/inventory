@@ -67,4 +67,10 @@ class CartController extends Controller
         return response()->json("done");
         
     }
+
+    public function vats(){
+       $done= DB::table('settings')->first();
+       return response()->json($done);
+    }
+    
 }

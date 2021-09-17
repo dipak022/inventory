@@ -70,6 +70,10 @@ Route::get('/increment/{id}', [App\Http\Controllers\Api\CartController::class, '
 
 Route::get('/decrement/{id}', [App\Http\Controllers\Api\CartController::class, 'Decrement']);
 
+Route::get('/vats/', [App\Http\Controllers\Api\CartController::class, 'vats']);
+
+Route::post('/orderdone/', [App\Http\Controllers\Api\PosController::class, 'orderDone']);
+
 
 
 
