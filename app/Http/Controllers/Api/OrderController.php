@@ -22,13 +22,19 @@ class OrderController extends Controller
         ->join('customers','oders.customer_id','customers.id')
         ->where('oders.id',$id)
         ->select('customers.name','customers.phone','customers.address','oders.*')
-        ->first;
+        ->first();
+        return response()->json($orders);
 
+        
+    }
+
+    public function OrderDetailsall($id){
         $details = DB::table('oder_details')
-                   ->join('oder_details.product_id','products.id')
+                   ->join('products','oder_details.product_id','products.id')
                    ->where('oder_details.order_id',$id)
-                   ->select('products.product_name','products.product_code','products.patho','oders.*')
+                   ->select('products.product_name','products.product_code','products.patho','oder_details.*')
                    ->get();
                    return response()->json($details);
+
     }
 }

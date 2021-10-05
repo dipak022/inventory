@@ -499,7 +499,7 @@
                   
               </li>
               <li class="nav-item">
-                  <router-link class="nav-link " to="/customer">
+                  <router-link class="nav-link " to="/searchorder">
                       <i class="icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                               <g>
@@ -780,7 +780,7 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-      </br></br></br></br></br></br>
+      <br><br><br><br><br><br>
         <router-view></router-view>
       </div>
     

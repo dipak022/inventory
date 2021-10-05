@@ -78,6 +78,8 @@ Route::get('/orders/', [App\Http\Controllers\Api\OrderController::class, 'todayO
 
 Route::get('/order/details/{id}', [App\Http\Controllers\Api\OrderController::class, 'OrderDetails']);
 
+Route::get('/order/orderdetails/{id}', [App\Http\Controllers\Api\OrderController::class, 'OrderDetailsall']);
+
 
 
 

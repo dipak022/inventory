@@ -42,7 +42,6 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'category_name' => 'required',
-            
         ]);
 
         
