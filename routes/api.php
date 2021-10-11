@@ -80,7 +80,13 @@ Route::get('/order/details/{id}', [App\Http\Controllers\Api\OrderController::cla
 
 Route::get('/order/orderdetails/{id}', [App\Http\Controllers\Api\OrderController::class, 'OrderDetailsall']);
 
+Route::post('/search/order/', [App\Http\Controllers\Api\OrderController::class, 'SearchOrderDate']);
+
+Route::post('/search/month/', [App\Http\Controllers\Api\OrderController::class, 'SearchOrderMonth']);
+
 
 
 
 Route::apiResource('/customer', 'App\Http\Controllers\Api\CustomerController');
+
+
